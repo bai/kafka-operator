@@ -44,6 +44,14 @@ type PerBrokerConfigurationState string
 // ExternalListenerConfigNames type describes a collection of external listener names
 type ExternalListenerConfigNames []string
 
+// KafkaVersion type describes the kafka version and docker version
+type KafkaVersion struct {
+	// Version holds the current version of the broker in semver format
+	Version string `json:"version,omitempty"`
+	// Image specifies the current docker image of the broker
+	Image string `json:"image,omitempty"`
+}
+
 // PKIBackend represents an interface implementing the PKIManager
 type PKIBackend string
 
@@ -151,6 +159,10 @@ type BrokerState struct {
 	PerBrokerConfigurationState PerBrokerConfigurationState `json:"perBrokerConfigurationState"`
 	// ExternalListenerConfigNames holds info about what listener config is in use with the broker
 	ExternalListenerConfigNames ExternalListenerConfigNames `json:"externalListenerConfigNames,omitempty"`
+	// Version holds the current version of the broker in semver format
+	Version string `json:"version,omitempty"`
+	// Image specifies the current docker image of the broker
+	Image string `json:"image,omitempty"`
 }
 
 const (
@@ -173,7 +185,7 @@ const (
 	GracefulDownscaleRequired CruiseControlState = "GracefulDownscaleRequired"
 	// GracefulDownscaleRunning states that the broker downscale is still running in CC
 	GracefulDownscaleRunning CruiseControlState = "GracefulDownscaleRunning"
-	// GracefulUpscaleSucceeded states that the broker downscaled gracefully
+	// GracefulDownscaleSucceeded states that the broker downscaled gracefully
 	GracefulDownscaleSucceeded CruiseControlState = "GracefulDownscaleSucceeded"
 
 	// Disk rebalance cruise control states
